@@ -37,9 +37,9 @@ public class Main {
             try {
                 System.out.println();
                 System.out.printf("The value of the task %d: %d%n",counter ,integerFuture.get(5, TimeUnit.SECONDS));
-            } catch (InterruptedException | TimeoutException e) {
+            } catch (TimeoutException e) {
+                System.out.printf("The task %d has been canceled! The value of the task: %d%n", counter, integerFuture.get());
                 integerFuture.cancel(true);
-                System.out.printf("The task %d has been canceled!%n", counter);
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }

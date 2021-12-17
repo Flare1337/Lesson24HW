@@ -14,7 +14,7 @@ public class StopwatchTask implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() {
+    public Integer call() throws InterruptedException {
         System.out.println("The stopwatch started to work!");
         while (timeInSeconds >= 0 && !Thread.currentThread().isInterrupted()) {
             if (endTimeInSeconds > 0 && timeInSeconds == 0) {
@@ -32,11 +32,7 @@ public class StopwatchTask implements Callable<Integer> {
             System.out.println("Remains seconds: " + timeInSeconds);
             timeInSeconds--;
             endTimeInSeconds++;
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            TimeUnit.SECONDS.sleep(1);
         }
 
         if (Thread.currentThread().isInterrupted()) {

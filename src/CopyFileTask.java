@@ -1,5 +1,6 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +16,7 @@ public class CopyFileTask implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() {
+    public Integer call() throws IOException, InterruptedException {
         try (FileInputStream fileInputStream = new FileInputStream(fromPath);
              FileOutputStream fileOutputStream = new FileOutputStream(toPath)) {
             byte[] buffer = new byte[2048];
@@ -38,8 +39,6 @@ public class CopyFileTask implements Callable<Integer> {
             if (Thread.currentThread().isInterrupted()) {
                 System.out.println("Whoops, something went wrong! The copying of the file has been interrupted...");
             }
-        } catch (Exception exception) {
-            exception.printStackTrace();
         }
         return (bytesInFile + 1);
     }
