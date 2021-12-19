@@ -9,7 +9,6 @@ public class Main {
         } catch (NegativeNumberOfSecondsException | ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     public void doSomeTasks() throws NegativeNumberOfSecondsException, ExecutionException, InterruptedException {
@@ -26,7 +25,6 @@ public class Main {
         tasks.add(workStealingPoolExecutor.submit(copyFileTask));
         tasks.add(workStealingPoolExecutor.submit(stopwatchTask));
 
-
         Future<Integer> integerFuture = null;
         var counter = 0;
         var counterTwo = tasks.size();
@@ -37,9 +35,9 @@ public class Main {
             try {
                 System.out.println();
                 System.out.printf("The value of the task %d: %d%n",counter ,integerFuture.get(5, TimeUnit.SECONDS));
-            } catch (TimeoutException e) {
-                System.out.printf("The task %d has been canceled! The value of the task: %d%n", counter, integerFuture.get());
+            } catch (TimeoutException | InterruptedException e) {
                 integerFuture.cancel(true);
+                System.out.printf("The task %d has been canceled!" , counter);
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }

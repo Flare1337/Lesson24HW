@@ -23,13 +23,13 @@ public class StopwatchTask implements Callable<Integer> {
             }
             if (timeInSeconds == 0) {
                 endTimeInSeconds = 0;
-                System.out.println("We've just started, huh");
+                System.out.println("We've just started, huh. Stopwatch stopped");
                 break;
             }
             if (timeInSeconds > 60) {
                 break;
             }
-            System.out.println("Remains seconds: " + timeInSeconds);
+            System.out.println("Remain seconds: " + timeInSeconds);
             timeInSeconds--;
             endTimeInSeconds++;
             TimeUnit.SECONDS.sleep(1);
@@ -39,7 +39,7 @@ public class StopwatchTask implements Callable<Integer> {
             System.out.println("Whoops, something went wrong! The countdown was interrupted");
         }
 
-        System.out.println("Total work time: " + endTimeInSeconds);
+        System.out.println("Total stopwatch work time: " + endTimeInSeconds);
         return endTimeInSeconds;
     }
 }

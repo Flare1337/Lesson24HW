@@ -21,14 +21,14 @@ public class CopyFileTask implements Callable<Integer> {
              FileOutputStream fileOutputStream = new FileOutputStream(toPath)) {
             byte[] buffer = new byte[2048];
 
-            System.out.println("Process of copying has been started!");
+            System.out.println("Process of copying file has been started!");
             while ((bytesInFile += fileInputStream.read(buffer)) > 0 && !Thread.currentThread().isInterrupted()) {
                 if (bytesInFile > GIGABYTE_IN_BYTES) {
                     System.out.println("The file is too big!");
                     break;
                 }
-                TimeUnit.SECONDS.sleep(1);
-                System.out.println("Value has been written! Total written bytes " + bytesInFile);
+                TimeUnit.SECONDS.sleep(5);
+                System.out.println("Bytes have been written! Total written bytes " + bytesInFile);
                 fileOutputStream.write(buffer);
             }
 
@@ -39,6 +39,7 @@ public class CopyFileTask implements Callable<Integer> {
             if (Thread.currentThread().isInterrupted()) {
                 System.out.println("Whoops, something went wrong! The copying of the file has been interrupted...");
             }
+            System.out.println("Process of copying the file is finished! Total number of bytes: " + (bytesInFile + 1));
         }
         return (bytesInFile + 1);
     }

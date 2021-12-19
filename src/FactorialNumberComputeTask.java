@@ -19,7 +19,7 @@ public class FactorialNumberComputeTask implements Callable<Integer> {
         if (Thread.currentThread().isInterrupted()) {
             System.out.println("Whoops, something went wrong! The computing of the factorial has been interrupted...");
         }
-        System.out.println("Calculating is finished, value: " + result);
+        System.out.println("Calculating factorial is finished, value: " + result);
         return result;
     }
 }
